@@ -1,0 +1,77 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap);
+
+@font-face {
+    font-family: 'meal-admin';
+    src:  url('../fonts/meal-admin.eot?b7a8ot');
+    src:  url('../fonts/meal-admin.eot?b7a8ot#iefix') format('embedded-opentype'),
+      url('../fonts/meal-admin.ttf?b7a8ot') format('truetype'),
+      url('../fonts/meal-admin.woff?b7a8ot') format('woff'),
+      url('../fonts/meal-admin.svg?b7a8ot#meal-admin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'meal-admin' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-calendar:before {
+    content: "\e90e";
+  }
+  .icon-search:before {
+    content: "\e90f";
+  }
+  .icon-facebook:before {
+    content: "\e90c";
+  }
+  .icon-twitter:before {
+    content: "\e90d";
+  }
+  .icon-linkedin:before {
+    content: "\e90a";
+  }
+  .icon-instagram:before {
+    content: "\e90b";
+  }
+  .icon-bell:before {
+    content: "\e909";
+  }
+  .icon-employees:before {
+    content: "\e900";
+  }
+  .icon-buffer:before {
+    content: "\e901";
+  }
+  .icon-check:before {
+    content: "\e902";
+  }
+  .icon-eye-close:before {
+    content: "\e903";
+  }
+  .icon-eye-open:before {
+    content: "\e904";
+  }
+  .icon-next:before {
+    content: "\e905";
+  }
+  .icon-plus:before {
+    content: "\e906";
+  }
+  .icon-prev:before {
+    content: "\e907";
+  }
+  .icon-export:before {
+    content: "\e908";
+  }
+  

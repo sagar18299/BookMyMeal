@@ -1,0 +1,66 @@
+/*!
+ * Vali Admin
+ * Author: Pratik Borsadiya
+ * ================================*/
+
+// 1 - TOOLS
+//---------------------------------------------------
+
+// This files are essential for the theme
+@import 'tools/fonts';
+@import 'tools/vars';
+@import 'tools/customize-bootstrap';
+@import 'tools/bootstrap-source/bootstrap';
+
+// Vendor plugin files
+// Can be excluded based on your needs
+@import 'tools/dataTables.bootstrap';
+@import 'tools/bootstrap-datepicker';
+//@import 'tools/sweetalert';
+//@import 'tools/notify';
+//@import 'tools/select2/select2';
+//@import 'tools/pace';
+//@import 'tools/jqvmap';
+//@import 'tools/fullcalendar';
+//@import 'tools/dropzone-basic';
+//@import 'tools/dropzone';
+
+// 2 - BASICS
+//---------------------------------------------------
+
+// This styles are essential for theme
+@import 'basics/app';
+//@import 'basics/helpers';
+
+// 3 - Component
+//---------------------------------------------------
+
+@import 'component/header';
+//@import 'component/sidebar';
+//@import 'component/sidebar-mini';
+
+// This styles are optional based on your preferance
+@import 'component/dropdown';
+@import 'component/button';
+@import 'component/app-title';
+@import 'component/tile';
+@import 'component/custom-radio-n-checkbox';
+@import 'component/toggle-button';
+@import 'component/side-modal';
+//@import 'component/material-half-bg';
+//@import 'component/material-loader';
+//@import 'component/button-spinner';
+//@import 'component/widgets';
+//@import 'component/chat';
+
+// Include the following style if you need RTL support
+// Also you will need to add dir="rtl" attribute to HTML tag
+
+//@import 'component/rtl';
+
+// 4 -Pages
+//---------------------------------------------------
+
+// This styles are optional based on your preferance
+@import 'pages/login';
+@import 'pages/default';
