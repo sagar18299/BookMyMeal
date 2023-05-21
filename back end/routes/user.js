@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/user');
@@ -39,31 +40,31 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
     // 1) set 2 step verification of GMAIL 
     // 2 ) security => "App Passwords" -> 
 
-    //send email to employee email id 
-     // sendEmail('emailid', 'password');
-    //
-  //   let transport = nodemailer.createTransport({
-  //     host: "smtp.gmail.com",
-  //     port:  587,
-  //     secure: false,
-  //     auth: {
-  //       user: process.env.EMAIL_USERNAME,
-  //       pass: process.env.EMAIL_PASSWORD
-  //     }
-  //  });
+    // send email to employee email id 
+    //  sendEmail('emailid', 'password');
+    
+    let transport = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port:  587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD
+      }
+   });
 
-  //  const mailOptions = {
-  //   from: 'from@gmail.com', // Sender address
-  //   to: 'to@gmail.com', // List of recipients
-  //   subject: 'Node Mailer New user registered', // Subject line
-  //   text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
-  //  };
+   const mailOptions = {
+    from: 'sagar18299@gmail.com', // Sender address
+    to: 'rr24471@gmail.com', // List of recipients
+    subject: 'Node Mailer New user registered', // Subject line
+    text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
+   };
 
-  //  transport.sendMail(mailOptions, function(err, info) {
-  //   if (err) {
-  //     console.log(err)
-  //     } 
-  //   });
+   transport.sendMail(mailOptions, function(err, info) {
+    if (err) {
+      console.log(err)
+      } 
+    });
     res.status(200).send({ data : user, message : 'User added sucessfully' });
   } catch (error) {
     console.log('/createNewUser', error);

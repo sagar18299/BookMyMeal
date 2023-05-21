@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -39,7 +40,7 @@ app.get('/', (req,res) => {
  }
 });
 
-mongoose.connect('mongodb://127.0.0.1:27017/organization', { useNewUrlParser : true })
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser : true })
 .then( () => {
   console.log('Connected with organization database')
 })
@@ -47,7 +48,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/organization', { useNewUrlParser : t
   console.log('Connction failed...')
 });
 
-const port = 4000;
+const port = process.env.PORT;
 
 app.listen(port, ()=>{
   console.log(`Sever is listening on port ${port}`);

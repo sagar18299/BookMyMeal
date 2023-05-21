@@ -10,7 +10,7 @@ async function auth(req, res, next) {
     try{
       var decodeId = jwt.decode(token);
       let user = await User.findOne({ _id : decodeId._id ,"tokens.token" : token }).select('-password');
-      console.log(user);
+      // console.log(user);
       if(!user) return res.status(404).send({ mesasge : "Invalid Credentials" });
       if(user.role != 'admin') return res.status(400).send({ error : 'Invalid Credentials' , message : 'You are not admin.' });
       if(!user.enabled) return res.status(400).send({ error : 'Invalid Credentials' , message : 'You are not authorised to perform this opertaion. auth middleware . contact Admin' });

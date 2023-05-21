@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/user');
@@ -66,7 +67,7 @@ router.get('/updateMyProfile', async (req,res) =>{
 });
 
 function  generateAuthToken(user) {
-  const token = jwt.sign({ _id : user._id }, '33NSY8hdQD1aaser234', { expiresIn : '10d' }, { algorithm : 'RS256' });
+  const token = jwt.sign({ _id : user._id }, process.env.JWT_SECRET_EMPLOYEE, { expiresIn : process.env.JWT_EMPLOYEE_EXPIRY }, { algorithm : 'RS256' });
   return token;
 }
 
