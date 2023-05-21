@@ -118,7 +118,7 @@ function NavBar() {
             BOOK MY MEAL
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -126,7 +126,26 @@ function NavBar() {
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
+
+<Button
+    onClick={handleCloseNavMenu}
+    sx={{ my: 2, color: 'white', display: 'block' }}
+    component={Link}
+    to="/"
+  >
+    Calendar
+  </Button>
+  <Button
+    onClick={handleCloseNavMenu}
+    sx={{ my: 2, color: 'white', display: 'block' }}
+    component={Link}
+    to="/employees/Booking"
+  >
+    Booking List
+  </Button>
+
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -151,11 +170,25 @@ function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography component={Link} textAlign="center" to={`/${setting}}`}>{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+
+<MenuItem onClick={handleCloseUserMenu}>
+  <Typography component={Link} textAlign="center" to="/profile">Profile</Typography>
+</MenuItem>
+<MenuItem onClick={handleCloseUserMenu}>
+  <Typography component={Link} textAlign="center" to="/account">Account</Typography>
+</MenuItem>
+<MenuItem onClick={handleCloseUserMenu}>
+  <Typography component={Link} textAlign="center" to="/dashboard">Dashboard</Typography>
+</MenuItem>
+<MenuItem onClick={handleCloseUserMenu}>
+  <Typography component={Link} textAlign="center" to="/logout">Logout</Typography>
+</MenuItem>
+
             </Menu>
           </Box>
         </Toolbar>
