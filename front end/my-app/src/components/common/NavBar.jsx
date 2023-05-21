@@ -12,9 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
+
 
 const pages = ['Calendar', 'Booking List'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,7 +40,7 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" elevation={0}>
+    <AppBar position="static"  sx={{backgroundColor : "#182C56"}} elevation={0}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -58,7 +62,7 @@ function NavBar() {
             BOOK MY MEAL
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }  }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -89,7 +93,7 @@ function NavBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography component={Link} textAlign="center" to={`/${page}`} >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -149,7 +153,7 @@ function NavBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography component={Link} textAlign="center" to={`/${setting}}`}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
