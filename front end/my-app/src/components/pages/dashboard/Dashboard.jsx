@@ -41,7 +41,7 @@ export default function Dashboard() {
       },
       {
         ...dateDetails,
-        name: `Custom : ${findById(data, 'buffer')?.count || 0}`,
+        name: `Custom : ${findById(data, 'custom')?.count || 0}`,
         color: "green",
       },
     ];
@@ -105,6 +105,18 @@ export default function Dashboard() {
         </Grid>
         <Grid item xs={12} lg={4}>
           <Card>
+            <CardContent>
+                <Typography variant="h6">Meal Plan</Typography>
+                
+            </CardContent>
+            <CardContent>
+                <Typography variant="h6">Meal Plan</Typography>
+                
+            </CardContent>
+            <CardContent>
+                <Typography variant="h6">Meal Plan</Typography>
+                
+            </CardContent>
             <CardContent>
                 <Typography variant="h6">Meal Plan</Typography>
                 

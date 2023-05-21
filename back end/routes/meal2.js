@@ -27,7 +27,7 @@ router.post('/createMeal2Bookings', authAdmin , async (req,res) =>{
      // insert dates into database
      for await (const date of finalDates){
       const employeeIds = req.body.employeeIds;
-      if(req.body.employeeIds){
+      if(req.body.employeeIds.length>0){
         for await (const emp of employeeIds){
           const data = { mealType : req.body.mealType ,  type : req.body.type , date : new Date(date).toISOString() ,  employeeId :  emp };
       
