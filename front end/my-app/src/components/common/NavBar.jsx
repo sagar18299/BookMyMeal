@@ -180,7 +180,7 @@ function NavBar() {
   <Typography component={Link} textAlign="center" to="/profile">Profile</Typography>
 </MenuItem>
 <MenuItem onClick={handleCloseUserMenu}>
-  <Typography component={Link} textAlign="center" to="/account">Account</Typography>
+  <Typography component={Link} textAlign="center" to="/employees/create">Creat User</Typography>
 </MenuItem>
 <MenuItem onClick={handleCloseUserMenu}>
   <Typography component={Link} textAlign="center" to="/dashboard">Dashboard</Typography>

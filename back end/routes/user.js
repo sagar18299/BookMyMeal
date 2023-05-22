@@ -26,6 +26,7 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
       email : value.email,
       employeeId : value.employeeId,
       mobile : value.mobile,
+      role : value.role,
       createdBy : req.user._id,
       department : value.department
     });
@@ -43,7 +44,7 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
     // send email to employee email id 
     //  sendEmail('emailid', 'password');
     
-    let transport = nodemailer.createTransport({
+    let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port:  587,
       secure: false,
@@ -54,13 +55,13 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
    });
 
    const mailOptions = {
-    from: 'sagar18299@gmail.com', // Sender address
-    to: 'user.email', // List of recipients
+    from: process.env.EMAIL_USERNAME, // Sender address
+    to: user.email, // List of recipients
     subject: 'Node Mailer New user registered', // Subject line
     text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
    };
 
-   transport.sendMail(mailOptions, function(err, info) {
+   transporter.sendMail(mailOptions, function(err, info) {
     if (err) {
       console.log(err)
       } 
@@ -79,7 +80,8 @@ const registerUserValidationSchema = () => {
     employeeId :  Joi.string().required().trim().label('Employee ID'),
     email : Joi.string().email().required().lowercase().label('Email ID'),
     mobile : Joi.string().regex(/^[0-9]+$/),
-    department : Joi.string().required().min(2).max(30).trim().label('department')
+    department : Joi.string().required().min(2).max(30).trim().label('department'),
+    role : Joi.string().required().min(2).max(30).trim().label('role')
   });
   return schema;
 }
