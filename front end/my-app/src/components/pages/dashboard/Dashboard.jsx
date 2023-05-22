@@ -4,7 +4,7 @@ import Calendar from "./Calendar";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { Card } from "react-bootstrap";
 import axios from "axios";
-import { Box } from "@mui/system";
+import { Box, borderRadius } from "@mui/system";
 import { format, getDate, getMonth, getYear } from "date-fns";
 
 export default function Dashboard() {
@@ -32,17 +32,17 @@ export default function Dashboard() {
       {
         ...dateDetails,
         name: `Employee : ${findById(data, 'employee')?.total || 0}`,
-        color: "purple",
+        color: "#5e4bba",
       },
       {
         ...dateDetails,
         name: `Non Employee : ${findById(data, 'non-employee')?.count || 0}`,
-        color: "red",
+        color: "#ae312e",
       },
       {
         ...dateDetails,
         name: `Custom : ${findById(data, 'custom')?.count || 0}`,
-        color: "green",
+        color: "#2e7c29",
       },
     ];
   }, [data, date]);
@@ -110,17 +110,15 @@ export default function Dashboard() {
                 
             </CardContent>
             <CardContent>
-                <Typography variant="h6">Meal Plan</Typography>
-                
+              {calendarData.map((item, index) => (
+                <Typography key={index} style={{ backgroundColor: item.color,margin:"5px" ,borderRadius:"10px" , padding :"20px" , color : "white" }}>
+                  {item.name}
+                  
+                </Typography>
+              ))}
             </CardContent>
-            <CardContent>
-                <Typography variant="h6">Meal Plan</Typography>
-                
-            </CardContent>
-            <CardContent>
-                <Typography variant="h6">Meal Plan</Typography>
-                
-            </CardContent>
+            
+            
           </Card>
         </Grid>
       </Grid>
