@@ -186,8 +186,9 @@ function NavBar() {
   <Typography component={Link} textAlign="center" to="/dashboard">Dashboard</Typography>
 </MenuItem>
 <MenuItem onClick={handleCloseUserMenu}>
-  <Typography component={Link} textAlign="center" onClick={()=>{
+  <Typography component={Link} textAlign="center" to="/login" onClick={()=>{
     localStorage.clear()
+    
   }}>Logout</Typography>
 </MenuItem>
 
