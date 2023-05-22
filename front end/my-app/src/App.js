@@ -11,6 +11,10 @@ import CreateEmployee from "./components/pages/employees/CreateEmployee";
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import BookingList from "./components/pages/Bookings/BookingList";
 import Addbooking from "./components/pages/Bookings/Addbooking";
+import PasswordReset from "./components/PasswordReset";
+import ForgotPassword from "./components/ForgotPassword";
+import Error from "./components/Error";
+
 
 function App() {
   useEffect(() => {
@@ -26,6 +30,9 @@ function App() {
        
 
         <Route path="/login" element={<Login />} />
+        <Route path="/password-reset" element={<PasswordReset />} /> 
+        <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} />
+        <Route path="*" element={<Error />} />
         <Route
           path="/"
           element={

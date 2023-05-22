@@ -10,6 +10,7 @@ const meal2Router = require('./routes/meal2');
 const calendarRouter = require('./routes/calendar');
 const reedemMealCouponRouter = require('./routes/reedem-meal-coupon');
 const getemployee = require('./routes/getemployee')
+const forgotPasswardRouter = require('./routes/forgotPassword')
 const validJson = require('./middlewares/valid-json');
 app.use(express.json());
 app.use(validJson);
@@ -27,6 +28,7 @@ app.use('/calendar',calendarRouter);
 app.use('/meal',mealRouter);
 app.use('/meal2',meal2Router);
 app.use('/employees',getemployee);
+app.use('/forgotPassword',forgotPasswardRouter);
 
 
 app.get('/', (req,res) => {

@@ -51,7 +51,7 @@ export default function Login() {
       localStorage.setItem(AUTH_TOKEN, data.data.token);
       axios.defaults.headers.common["Authorization"] = data.data.token;
       setInputData({...inputData,email:"",password:""});
-      navigate("/createuser")
+      navigate("/")
   }
 
   } 
@@ -138,7 +138,7 @@ export default function Login() {
                 <div className="form-group mb-0">
                   <div className="utility">
                     <p>
-                      <a href="#" className="form-link">
+                      <a href="/password-reset" className="form-link">
                         Forgot Password?
                       </a>
                     </p>

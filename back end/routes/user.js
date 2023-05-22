@@ -55,7 +55,7 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
 
    const mailOptions = {
     from: 'sagar18299@gmail.com', // Sender address
-    to: 'rr24471@gmail.com', // List of recipients
+    to: 'user.email', // List of recipients
     subject: 'Node Mailer New user registered', // Subject line
     text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
    };
