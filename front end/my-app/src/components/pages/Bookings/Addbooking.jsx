@@ -131,13 +131,13 @@ export default function Addbooking() {
         Book Meal
       </Button>
       <Dialog maxWidth="md"  open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Meal Book</DialogTitle>
         <DialogContent>
          <BookingList/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          
         </DialogActions>
       </Dialog>
     </div>
