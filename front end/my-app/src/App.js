@@ -14,6 +14,7 @@ import Addbooking from "./components/pages/Bookings/Addbooking";
 import PasswordReset from "./components/PasswordReset";
 import ForgotPassword from "./components/ForgotPassword";
 import Error from "./components/Error";
+import DisableDate from "./components/pages/Disable/DisableDate";
 
 
 function App() {
@@ -55,6 +56,14 @@ function App() {
           element={
             <PrivateRoute>
               <Addbooking/>
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/employees/Disable"
+          element={
+            <PrivateRoute>
+              <DisableDate/>
             </PrivateRoute>
           }
         ></Route>

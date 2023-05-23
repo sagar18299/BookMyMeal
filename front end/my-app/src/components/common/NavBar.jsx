@@ -144,6 +144,14 @@ function NavBar() {
   >
     Booking List
   </Button>
+  <Button
+    onClick={handleCloseNavMenu}
+    sx={{ my: 2, color: 'white', display: 'block' }}
+    component={Link}
+    to="/employees/Disable"
+  >
+    Disable Date
+  </Button>
 
 
           </Box>
