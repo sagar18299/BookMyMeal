@@ -81,7 +81,8 @@ const Form = () => {
         type: values.category.toLowerCase(),
         mealType: values.mealType.toLowerCase(),
         employeeIds: selectedEmployees,
-        count: values.count
+        count: values.count,
+        notes: values.notes
       };
       try {
         const response = await axios.post(

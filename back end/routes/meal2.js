@@ -73,6 +73,7 @@ router.post('/createMeal2Bookings', authAdmin , async (req,res) =>{
       //   });
       //   meal2 = await meal2.save();
       // }
+      // console.log(req.body);
       meal2 = new Meal2({
         mealType : req.body.mealType,
         type : req.body.type ,
@@ -208,11 +209,12 @@ const getFinalDates = (dates,disabledDates) => {
 const createMeal2BookingValidationSchema = () => {
   const schema = Joi.object({
     startDate : Joi.string().required().label('Start Date'),
-    endDate : Joi.string().required().label('Ens Date'),
+    endDate : Joi.string().required().label('End Date'),
     type : Joi.string().required().valid('employee', 'non-employee', 'custom').label('Type'),
     mealType : Joi.string().required().valid('lunch', 'dinner', 'custom').label('Type'),
     employeeIds : Joi.array().items(Joi.string()),
-    count : Joi.number()
+    count : Joi.number(),
+    notes : Joi.string()
   });
   return schema;
 }

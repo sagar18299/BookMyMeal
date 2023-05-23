@@ -125,7 +125,7 @@ export default function Login() {
               </div>
 
               <div className="d-flex align-items-center justify-content-between">
-                <div className="form-group mb-0">
+                {/* <div className="form-group mb-0">
                   <label className="custom-checkbox mb-0">
                     <span className="checkbox__title">Remember Me</span>
                     <input
@@ -134,7 +134,7 @@ export default function Login() {
                     />
                     <span className="checkbox__checkmark"></span>
                   </label>
-                </div>
+                </div> */}
                 <div className="form-group mb-0">
                   <div className="utility">
                     <p>
