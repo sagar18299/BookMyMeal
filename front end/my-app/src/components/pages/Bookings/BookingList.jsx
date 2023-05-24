@@ -69,8 +69,8 @@ const Form = () => {
     initialValues: {
       category: "",
       mealType: "",
-      notes: "",
-      count: "",
+      notes: "notes",
+      count: "0",
       startDate: null,
       endDate: null
     },

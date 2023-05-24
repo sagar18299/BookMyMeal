@@ -88,6 +88,25 @@ router.post('/disableDate', auth , async (req,res) =>{
 });
 
 
+// router.post('/getAllCalendarDates', auth , async (req,res) =>{
+//   try {
+//     //
+//     const pageOptions = {
+//       page : req.body.pageNo,
+//       limit : req.body.limit
+//     }
+    
+//     const caledarDates = await Calendar.find({}).sort({ createdAt : -1 }).skip((pageOptions.page - 1 ) * pageOptions.limit).limit(pageOptions.limit);
+    
+    
+//     res.status(200).send({ message : 'disabled dates get successfully.', data : { caledarDates }  });
+
+//   } catch (error) {
+//     console.log('/getAllCalendarDates', error);
+//     return res.status(500).send('something went wrong. please try after some time');
+//   }
+// });
+
 router.post('/getAllCalendarDates', auth , async (req,res) =>{
   try {
     //
@@ -95,16 +114,15 @@ router.post('/getAllCalendarDates', auth , async (req,res) =>{
       page : req.body.pageNo,
       limit : req.body.limit
     }
-    
-    const caledarDates = await Calendar.find({}).sort({ createdAt : -1 }).skip((pageOptions.page - 1 ) * pageOptions.limit).limit(pageOptions.limit);
-    console.log(caledarDates);
-    
-    res.status(200).send({ message : 'disabled dates get successfully.', data : { caledarDates }  });
+
+    const totalCount = await Calendar.count()
+    const calendarDates = await Calendar.find({}).sort({ createdAt : -1 }).skip((pageOptions.page) * pageOptions.limit).limit(pageOptions.limit);
+    res.status(200).send({ message : 'disabled dates get successfully.', data : { caledarDates: calendarDates, total: totalCount }  });
 
   } catch (error) {
     console.log('/getAllCalendarDates', error);
-    return res.status(500).send('something went wrong. please try after some time');
-  }
+    return res.status(500).send('something went wrong. please try after some time');
+  }
 });
 
 
