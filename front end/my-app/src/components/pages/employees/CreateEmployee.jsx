@@ -298,12 +298,11 @@ const CreateEmployee = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add your form submission logic here
-    //let token = localStorage.getItem(AUTH_TOKEN);
+
   
     axios.post('/users/createNewUser', formData)
       .then((response) => {
-        // Handle successful registration
+        
         console.log(response);
       })
       .catch((error) => {
@@ -341,16 +340,16 @@ const CreateEmployee = () => {
       <DashboardLayout />
      
       
-      <Button variant="contained" onClick={handleOpen}>Create User</Button>
+      <Button sx={{mx : 10, my : 10}} variant="contained" onClick={handleOpen}>Create User</Button>
       
-      <Dialog  fullWidth={"100%"}
-        maxWidth={'md'} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog align={"center"} fullWidth={"100%"}
+         open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Register</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
           <Grid container spacing={2} >
       <Grid item xs={12} marginY={"25px"} py={"30px"} >
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="text"
                 name="firstName"
@@ -360,7 +359,7 @@ const CreateEmployee = () => {
                 required
               />
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="text"
                 name="lastName"
@@ -370,7 +369,7 @@ const CreateEmployee = () => {
                 required
               />
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="text"
                 name="employeeId"
@@ -380,7 +379,7 @@ const CreateEmployee = () => {
                 required
               />
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="email"
                 name="email"
@@ -390,7 +389,7 @@ const CreateEmployee = () => {
                 required
               />
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="text"
                 name="mobile"
@@ -400,7 +399,7 @@ const CreateEmployee = () => {
                 required
               />
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="text"
                 name="department"
@@ -410,14 +409,14 @@ const CreateEmployee = () => {
                 required
               />
             </Grid>
-            <Grid>
-              <RadioGroup name="role" value={formData.role} onChange={handleRoleChange} required>
+            <Grid mx={22}>
+              <RadioGroup  name="role" value={formData.role} onChange={handleRoleChange} required>
                 <FormControlLabel value="admin" control={<Radio />} label="Admin" />
                 <FormControlLabel value="employee" control={<Radio />} label="Employee" />
               </RadioGroup>
             </Grid>
-            <Grid>
-              <Button type="submit" variant="contained">Register</Button>
+            <Grid my={2}>
+              <Button type="submit" variant="contained" sx={{px : 5, borderRadius : '17px'}}>Register</Button>
             </Grid>
             </Grid  >
       </Grid >

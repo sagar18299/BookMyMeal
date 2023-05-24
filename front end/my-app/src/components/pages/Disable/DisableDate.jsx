@@ -65,15 +65,15 @@ const DisableDate = () => {
 
       </Grid>
       
-      <Button variant="contained" onClick={handleOpen}>Open Dialog</Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Button variant="contained" onClick={handleOpen}>Disable Date</Button>
+      <Dialog align={"center"} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Disable Date</DialogTitle>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
           <Grid item xs={12}>
         
-            <Grid>
+            <Grid my={2}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   name="date"
@@ -82,7 +82,7 @@ const DisableDate = () => {
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <TextField
                 type="text"
                 name="description"
@@ -96,10 +96,13 @@ const DisableDate = () => {
                 fullWidth
               />
             </Grid>
-            <Grid>
+            <Grid my={2}>
               <Button
                 type="submit"
                 variant="contained"
+                
+
+                sx={{ mx:6,px : 5, borderRadius : '17px'}}
                 disabled={!formik.isValid || !formik.dirty}
               >
                 Submit

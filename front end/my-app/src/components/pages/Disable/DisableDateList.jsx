@@ -3,20 +3,28 @@ import axios from "axios";
 import { Typography } from "@mui/material";
 
 const DisableDateList = () => {
-  const [calendarDates, setCalendarDates] = useState([]);
+    
+  const [calendarDatesList, setCalendarDatesList] = useState([]);
 
   useEffect(() => {
-    fetchCalendarDates();
+    // fetchCalendarDates();
+    setTimeout(() => {
+        fetchCalendarDates();
+      }, 1000);
+
   }, []);
 
   const fetchCalendarDates = async () => {
+    
     try {
       const response = await axios.post("/calendar/getAllCalendarDates", {
         "pageNo": 1, // Adjust the page number and limit as needed
         "limit": 100,
       });
-      setCalendarDates(response.data.data.calendarDates);
-      console.log(setCalendarDates);
+      console.log(response);
+      setCalendarDatesList(response.data.data.calendarDates);
+      
+
     } catch (error) {
       console.error("Error fetching calendar dates:", error);
     }
@@ -25,7 +33,7 @@ const DisableDateList = () => {
   return (
     <div>
       <Typography variant="h6">Calendar Dates</Typography>
-      {calendarDates?.map((date) => (
+      {calendarDatesList?.map((date) => (
         <div key={date._id}>
           <Typography>{date.date}</Typography>
           <Typography>{date.description}</Typography>
