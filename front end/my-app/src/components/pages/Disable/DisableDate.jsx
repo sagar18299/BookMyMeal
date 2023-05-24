@@ -11,6 +11,9 @@ import { useFormik } from "formik";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Grid from '@mui/system/Unstable_Grid/Grid';
+import DisableDateList from './DisableDateList';
+
 
 const DisableDate = () => {
   const [open, setOpen] = useState(false);
@@ -55,12 +58,22 @@ const DisableDate = () => {
   return (
     <>
       <DashboardLayout />
+      <Grid container>
+        <Grid item xs={12} md={6}>
+          <DisableDateList/>
+        </Grid>
+
+      </Grid>
+      
       <Button variant="contained" onClick={handleOpen}>Open Dialog</Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Disable Date</DialogTitle>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
-            <div>
+          <Grid container spacing={2}>
+          <Grid item xs={12}>
+        
+            <Grid>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   name="date"
@@ -68,8 +81,8 @@ const DisableDate = () => {
                   onChange={(date) => formik.setFieldValue('date', date)}
                 />
               </LocalizationProvider>
-            </div>
-            <div>
+            </Grid>
+            <Grid>
               <TextField
                 type="text"
                 name="description"
@@ -82,8 +95,8 @@ const DisableDate = () => {
                 rows={4}
                 fullWidth
               />
-            </div>
-            <div>
+            </Grid>
+            <Grid>
               <Button
                 type="submit"
                 variant="contained"
@@ -91,10 +104,13 @@ const DisableDate = () => {
               >
                 Submit
               </Button>
-            </div>
+            </Grid>
+            </Grid>
+            </Grid>
           </form>
         </DialogContent>
       </Dialog>
+      
     </>
   );
 };

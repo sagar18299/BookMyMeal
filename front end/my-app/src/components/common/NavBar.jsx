@@ -41,10 +41,16 @@ function NavBar() {
 
   return (
     <AppBar position="static"  sx={{backgroundColor : "#182C56"}} elevation={0}>
+       
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+        <div class="logoW-wrapper">
+              <img src="images/logo-white.svg" alt="Rishabh Software"/>
+              <span>Meal Facility</span>
+            </div>
+       
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -60,7 +66,7 @@ function NavBar() {
             }}
           >
             BOOK MY MEAL
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }  }}>
             <IconButton
