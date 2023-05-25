@@ -13,13 +13,17 @@ router.post('/redeemMealCoupon', auth , async (req,res) =>{
       // req validation using joi 
       let meal = await Meal2.findOne({ date : new Date(req.body.date),employeeId : req.body.employeeId });
       if(meal){
-        meal.reedem="true";
+        if(meal.cancel="false"){
+          meal.reedem="true"
+        }
+        else{
+          res.send("invalid meal")
+        }
         
       }
+      
 
       meal = await meal.save();
-
-
 
       // if( req.body.couponType == 'employee'){
       //   if(req.body.mealType == 'lunch'){
@@ -39,6 +43,22 @@ router.post('/redeemMealCoupon', auth , async (req,res) =>{
     return res.status(200).send({ meal, message : 'Meal data get sucessfully' });
   } catch (error) {
     console.log('/redeemMealCoupon', error);
+    return res.status(500).send('something went wrong. please try after some time');
+  }
+});
+
+router.post('/cancelMealCoupon', auth , async (req,res) =>{
+  try {
+      // req validation using joi 
+      let meal = await Meal2.findOne({ date : new Date(req.body.date),employeeId : req.body.employeeId });
+      if(meal){
+        meal.cancel="true";
+      }
+      meal = await meal.save();
+
+    return res.status(200).send({ meal, message : 'Meal data get sucessfully' });
+  } catch (error) {
+    console.log('/cancelMealCoupon', error);
     return res.status(500).send('something went wrong. please try after some time');
   }
 });

@@ -150,24 +150,66 @@ router.post('/getBookingForAllEmployees', authAdmin , async (req,res) =>{
     // 1st dec - 31st dec
 
 
+
+
+
+
     const meals = await Meal2.aggregate([
       {
-        $match : { $and: [{ date  :  { $gte : startDate } }, { date  :  { $lte : endDate } },  {  type : 'employee'  }]}    
-      },
-      {
-        $group : {
-          _id : "$employeeId",
-          date : { $push : "$date" }
+        $match: {
+          $and: [{ date: { $gte: startDate } }, { date: { $lte: endDate } }, { type: 'employee' }]
         }
       },
       {
-        $project : {
-          _id : 1,
-          date : 1,
-          total : { $size : "$date" }
+        $lookup: {
+          from: 'users', // assuming your User collection is named 'users'
+          localField: 'employeeId',
+          foreignField: 'employeeId',
+          as: 'user'
+        }
+      },
+      {
+        $unwind: '$user'
+      },
+      {
+        $group: {
+          _id: '$employeeId',
+          userName: { $first: '$user.firstName' },
+          deparment: { $first: '$user.department' },
+          date: { $push: '$date' }
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          userName: 1,
+          deparment: 1,
+          date: 1,
+          total: { $size: '$date' }
         }
       }
-    ])
+    ]);
+    
+
+    // const meals = await Meal2.aggregate([
+    //   {
+    //     $match : { $and: [{ date  :  { $gte : startDate } }, { date  :  { $lte : endDate } },  {  type : 'employee'  }]}    
+    //   },
+    //   {
+    //     $group : {
+    //       _id : "$employeeId",
+    //       date : { $push : "$date" }
+    //     }
+    //   },
+      
+    //   {
+    //     $project : {
+    //       _id : 1,
+    //       date : 1,
+    //       total : { $size : "$date" }
+    //     }
+    //   }
+    // ])
     res.status(200).send({ data : meals, message : 'Meal2 by date aggregation get sucessfully' });
   } catch (error) {
     console.log('/createNewUser', error);

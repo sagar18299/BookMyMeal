@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import BookingList from './BookingList';
 import DashboardLayout from "../../layouts/DashboardLayout";
 import Grid from '@mui/system/Unstable_Grid/Grid';
+import TableList from './TableList';
 import {
   FormControl,
   FormControlLabel,
@@ -54,9 +55,27 @@ export default function Addbooking() {
     }),
   });
   
-  
+  const [tableData, setTableData] = useState([]);
     const [employeeList, setEmployeeList] = useState([]);
     const [selectedEmployees, setSelectedEmployees] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.post('/meal2/getBookingForAllEmployees',{
+            "startDate" : "2023-05-01",
+            "endDate" : "2023-05-30"
+          });
+          const data = response.data;
+          setTableData(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    
+      setTimeout(() => {  fetchData();}
+      , 500);
+    }, []);
   
     useEffect(() => {
       fetchEmployeeList();
@@ -88,45 +107,21 @@ export default function Addbooking() {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(tableData);
 
   return (
     <DashboardLayout>
-      <Grid container >
-      <Grid item xs={10}>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Select</TableCell>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {(employeeList || []).map((employee) => (
-                    <TableRow key={employee.employeeId}>
-                      <TableCell>
-                        <Checkbox
-                          checked={selectedEmployees.includes(
-                            employee.employeeId
-                          )}
-                          onChange={() =>
-                            handleEmployeeSelect(employee.employeeId)
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>{employee.employeeId}</TableCell>
-                      <TableCell>{employee.firstName}</TableCell>
-                      <TableCell>{employee.email}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-        <Grid item xs={2}  sx={{ py:10,px:2}}>
-    <div >
+    <Grid container>
+    <Grid 
+     item
+     xs={10}
+    
+     >
+    <TableList data={tableData} maxWidth={"80%"} />
+    </Grid >"
+     
+        <Grid item xs={2}  sx={{ py:10,px:2}}  >
+    <Grid >
       <Button variant="contained" sx={{ px : 5, borderRadius : '17px',backgroundColor : '#E23E3F' }}  size="large" onClick={handleClickOpen}>
         Book Meal
       </Button>
@@ -140,9 +135,10 @@ export default function Addbooking() {
           
         </DialogActions>
       </Dialog>
-    </div>
     </Grid>
     </Grid>
+    </Grid>
+    
     </DashboardLayout>
   );
 }

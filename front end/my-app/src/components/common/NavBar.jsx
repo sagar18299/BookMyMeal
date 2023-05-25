@@ -44,12 +44,12 @@ function NavBar() {
        
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <div class="logoW-wrapper">
-              <img src="images/logo-white.svg" alt="Rishabh Software"/>
+        {/* <div class="logoW-wrapper">
+              <img src="./images/logo-white.svg" alt="Rishabh Software"/>
               <span>Meal Facility</span>
-            </div>
+            </div>  */}
        
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           {/* <Typography
             variant="h6"
             noWrap
@@ -190,15 +190,15 @@ function NavBar() {
                 </MenuItem>
               ))} */}
 
-<MenuItem onClick={handleCloseUserMenu}>
+{/* <MenuItem onClick={handleCloseUserMenu}>
   <Typography component={Link} textAlign="center" to="/profile">Profile</Typography>
-</MenuItem>
+</MenuItem> */}
 <MenuItem onClick={handleCloseUserMenu}>
   <Typography component={Link} textAlign="center" to="/employees/create">Creat User</Typography>
 </MenuItem>
-<MenuItem onClick={handleCloseUserMenu}>
+{/* <MenuItem onClick={handleCloseUserMenu}>
   <Typography component={Link} textAlign="center" to="/dashboard">Dashboard</Typography>
-</MenuItem>
+</MenuItem> */}
 <MenuItem onClick={handleCloseUserMenu}>
   <Typography component={Link} textAlign="center" to="/login" onClick={()=>{
     localStorage.clear()

@@ -66,11 +66,14 @@ export default function Dashboard() {
     if (date) {
         console.log("DATE", date)
         getMealData(format(date, "yyyy-MM-dd"));
+      
     }
   }, [date]);
 
   useEffect(() => {
+
     setDate(new Date());
+
   }, []);
 
   if (!data) {
