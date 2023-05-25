@@ -6,6 +6,7 @@ import { AUTH_TOKEN } from "../../../helpers/constants";
 
 
 
+
 export default function Login() {
 
  const navigate = useNavigate();
@@ -24,37 +25,26 @@ export default function Login() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const { email, password } = inputData;
+  
+    try {
+      const { email, password } = inputData;
 
-    const {data, status} = await axios.post('/employee/login', {
-        email, password
-    });
+      const { data, status } = await axios.post("/employee/login", {
+        email,
+        password,
+      });
 
-    // const data = await fetch("/employee/login",{
-    //   method:"POST",
-    //   headers:{
-    //       "Content-Type":"application/json"
-    //   },
-    //   body:JSON.stringifAy({
-    //        email, password
-    //   })
-    // });
-    // const res = await data.json();
-
-    console.log(data);
-    console.log(status);
-
- 
-
-    if(status === 200){
-      localStorage.setItem(AUTH_TOKEN, data.data.token);
-      axios.defaults.headers.common["Authorization"] = data.data.token;
-      setInputData({...inputData,email:"",password:""});
-      navigate("/")
-  }
-
-  } 
+      if (status === 200) {
+        localStorage.setItem(AUTH_TOKEN, data.data.token);
+        axios.defaults.headers.common["Authorization"] = data.data.token;
+        setInputData({ ...inputData, email: "", password: "" });
+        navigate("/");
+      }
+    } catch (error) {
+     
+      console.log(error);
+    }
+  };
 
   function togglePassword() {
     const passwordInput = document.getElementById("password-field");
@@ -163,7 +153,8 @@ export default function Login() {
       {/* The javascript plugin to display page loading on top*/}
       <script src="js/plugins/pace.min.js"></script>
 
-
+   
+    
       </body>
 
   );
