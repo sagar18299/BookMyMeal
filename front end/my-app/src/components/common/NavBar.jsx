@@ -13,6 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+// import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 const pages = ['Calendar', 'Booking List'];
@@ -49,7 +52,8 @@ function NavBar() {
               <span>Meal Facility</span>
             </div>  */}
        
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <FastfoodIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 5 }} />
           {/* <Typography
             variant="h6"
             noWrap
@@ -97,14 +101,23 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography component={Link} textAlign="center" to={`/${page}`} >{page}</Typography>
+              
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography component={Link} textAlign="center" to={`/`} >Calendar</Typography>
+                  
                 </MenuItem>
-              ))}
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography component={Link} textAlign="center" to={`/employees/Booking`} > Booking List</Typography>
+                  
+                </MenuItem>
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography component={Link} textAlign="center" to={`/employees/Disable`} >Disable Date</Typography>
+                  
+                </MenuItem>
+              
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <FastfoodIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -165,7 +178,7 @@ function NavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <AccountCircleIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 5 }} />
               </IconButton>
             </Tooltip>
             <Menu

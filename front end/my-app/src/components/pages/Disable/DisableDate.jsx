@@ -97,7 +97,7 @@ const DisableDate = () => {
               <Typography variant="h6" fontWeight={600}>
                 Disable Dates
               </Typography>
-              <Button   sx={{  borderRadius:"17px", px:"50px", py:"10px"}} variant="contained" onClick={handleOpen}>
+              <Button   sx={{ px : 5, borderRadius : '17px',backgroundColor : '#E23E3F' }} variant="contained" onClick={handleOpen}>
                 Add Date
               </Button>
             </Grid>

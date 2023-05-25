@@ -104,7 +104,7 @@ const Form = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid container spacing={10}>
+      <Grid container  spacing={4}>
         <Grid item xs={12}>
           <FormControl component="fieldset">
             <FormLabel component="legend">Category</FormLabel>

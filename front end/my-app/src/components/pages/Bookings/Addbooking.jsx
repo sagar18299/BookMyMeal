@@ -114,14 +114,14 @@ export default function Addbooking() {
     <Grid container>
     <Grid 
      item
-     xs={10}
+     xs={8}
     
      >
-    <TableList data={tableData} maxWidth={"80%"} />
+    <TableList data={tableData}  />
     </Grid >"
      
-        <Grid item xs={2}  sx={{ py:10,px:2}}  >
-    <Grid >
+        <Grid item xs={2}  sx={{ py:10,px:2,mx :16,my : 5}}  >
+    <Grid xs={2} >
       <Button variant="contained" sx={{ px : 5, borderRadius : '17px',backgroundColor : '#E23E3F' }}  size="large" onClick={handleClickOpen}>
         Book Meal
       </Button>

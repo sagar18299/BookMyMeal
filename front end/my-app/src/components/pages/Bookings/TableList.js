@@ -39,7 +39,7 @@ const TableList = ({ data }) => {
     ];
   
     return (
-      <div style={{ height: 400, width: '60%', margin : "20px" }}>
+      <div style={{ height: 400, width: '100%', margin : "100px" }}>
         <DataGrid rows={rows} columns={columns} pageSize={5} />
       </div>
     );
