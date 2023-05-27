@@ -8,10 +8,11 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import axios from "axios";
 import { useFormik } from "formik";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { Container, Grid, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import {format} from "date-fns";
 
 const DisableDate = () => {
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ const DisableDate = () => {
     },
     onSubmit: async (values) => {
       const data = {
-        date: values.date,
+        date: format(values.date, 'yyyy-MM-dd'),
         description: values.description,
       };
 
@@ -79,9 +80,9 @@ const DisableDate = () => {
   });
 
   useEffect(() => {
-
-     setTimeout(() => {getDisabledList(paginationModel);
-     }, 1000);
+    setTimeout(() => {
+      getDisabledList(paginationModel);
+    }, 1000);
   }, [paginationModel]);
 
   return (
@@ -97,7 +98,11 @@ const DisableDate = () => {
               <Typography variant="h6" fontWeight={600}>
                 Disable Dates
               </Typography>
-              <Button   sx={{ px : 5, borderRadius : '17px',backgroundColor : '#E23E3F' }} variant="contained" onClick={handleOpen}>
+              <Button
+                sx={{ px: 5, borderRadius: "17px", backgroundColor: "#E23E3F" }}
+                variant="contained"
+                onClick={handleOpen}
+              >
                 Add Date
               </Button>
             </Grid>
@@ -140,8 +145,8 @@ const DisableDate = () => {
           <DialogTitle id="form-dialog-title">Disable Date</DialogTitle>
           <DialogContent>
             <form onSubmit={formik.handleSubmit}>
-              <Grid my={2} >
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Grid my={2}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     name="date"
                     value={formik.values.date}
@@ -165,7 +170,7 @@ const DisableDate = () => {
               </Grid>
               <Grid align="center">
                 <Button
-                  sx={{  borderRadius:"17px", px:"50px"}}
+                  sx={{ borderRadius: "17px", px: "50px" }}
                   type="submit"
                   variant="contained"
                   disabled={!formik.isValid || !formik.dirty}
