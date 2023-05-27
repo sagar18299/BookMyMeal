@@ -27,6 +27,7 @@
     "react-bootstrap": "^2.7.4",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-mui-calendar": "^1.0.37",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",

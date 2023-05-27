@@ -1,31 +1,31 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { AUTH_TOKEN } from "../../../helpers/constants";
-
-
-
+import toast from "react-hot-toast";
 
 export default function Login() {
+  const navigate = useNavigate();
 
- const navigate = useNavigate();
+  const data = { email: "", password: "" };
+  const [inputData, setInputData] = useState(data);
 
-    const data= { email:"", password:""};
-  const [inputData,setInputData]= useState(data);
-
-  const handleInput = (e)=> {
+  const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(name,value);
+    console.log(name, value);
 
-    setInputData({...inputData,[name]:value});
-  }
+    setInputData({ ...inputData, [name]: value });
+  };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    const loader = toast.loading(
+      "Please wait while we are processing your request"
+    );
+
     try {
       const { email, password } = inputData;
 
@@ -39,10 +39,15 @@ export default function Login() {
         axios.defaults.headers.common["Authorization"] = data.data.token;
         setInputData({ ...inputData, email: "", password: "" });
         navigate("/");
+
+        toast.success("Logged in successful!");
       }
     } catch (error) {
-     
       console.log(error);
+
+      toast.error("Some error occurred");
+    } finally {
+      toast.dismiss(loader);
     }
   };
 
@@ -67,7 +72,7 @@ export default function Login() {
         <div className="login-content-lt"></div>
         <div className="login-content-rt">
           <div className="login-box">
-            <form className="login-form" action="#" method="POST"  >
+            <form className="login-form" action="#" method="POST">
               <div className="logo-wrapper">
                 <img src="images/logo.svg" alt="Rishabh Software" />
                 <span>Meal Facility</span>
@@ -84,10 +89,9 @@ export default function Login() {
                     type="text"
                     placeholder="Robert Smith"
                     autoFocus
-
-                      name="email"
-                      onChange={handleInput}
-                      value={inputData.email}
+                    name="email"
+                    onChange={handleInput}
+                    value={inputData.email}
                   />
                   <div className="icon-after icon-green">
                     <i className="icon-check"></i>
@@ -102,7 +106,7 @@ export default function Login() {
                     id="password-field"
                     className="form-control"
                     type="password"
-                    name='password'
+                    name="password"
                     onChange={handleInput}
                     value={inputData.password}
                   />
@@ -137,7 +141,12 @@ export default function Login() {
               </div>
 
               <div className="form-group btn-container">
-                <button className="btn btn-xl btn-primary" onClick={handleSubmit}>Sign in</button>
+                <button
+                  className="btn btn-xl btn-primary"
+                  onClick={handleSubmit}
+                >
+                  Sign in
+                </button>
               </div>
             </form>
           </div>
@@ -152,23 +161,6 @@ export default function Login() {
       <script src="js/main.js"></script>
       {/* The javascript plugin to display page loading on top*/}
       <script src="js/plugins/pace.min.js"></script>
-
-   
-    
-      </body>
-
+    </body>
   );
-}     
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
