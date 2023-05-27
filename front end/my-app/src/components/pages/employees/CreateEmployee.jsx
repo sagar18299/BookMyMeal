@@ -283,6 +283,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {  RadioGroup,FormControlLabel, Radio, Button, Grid} from "@mui/material";
 import DashboardLayout from '../../layouts/DashboardLayout';
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 const CreateEmployee = () => {
   const [open, setOpen] = useState(false);
@@ -299,16 +300,27 @@ const CreateEmployee = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const loader = toast.loading(
+      "Please wait while we are processing your request"
+    );
+
   
     axios.post('/users/createNewUser', formData)
       .then((response) => {
         
         console.log(response);
+        
+        toast.success("User Create successfully!");
       })
       .catch((error) => {
-        // Handle registration error
+        
         console.error(error);
-      });
+        toast.error("Some error occurred");
+      })
+      .finally(()=> {
+        toast.dismiss(loader);
+      })
+      ;
   };
 
   const handleInputChange = (event) => {
@@ -340,7 +352,7 @@ const CreateEmployee = () => {
       <DashboardLayout />
      
       
-      <Button sx={{mx : 10, my : 10}} variant="contained" onClick={handleOpen}>Create User</Button>
+      <Button   sx={{ px: 5,mx : 10, my : 10, borderRadius: "17px", backgroundColor: "#E23E3F" }} variant="contained" onClick={handleOpen}>Create User</Button>
       
       <Dialog align={"center"} fullWidth={"100%"}
          open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

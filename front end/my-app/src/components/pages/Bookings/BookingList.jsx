@@ -20,6 +20,7 @@ import {
   Checkbox,
   Typography,
 } from "@mui/material";
+import toast from "react-hot-toast";
 
 import axios from "axios";
 import DateRangePicker from "tw-daterange";
@@ -84,14 +85,24 @@ const Form = () => {
         count: values.count,
         notes: values.notes
       };
+      const loader = toast.loading(
+        "Please wait while we are processing your request"
+      );
+  
       try {
         const response = await axios.post(
           "/meal2/createMeal2Bookings",
           payload
         );
         console.log("Response:", response.data);
+        toast.success("Meal Book successful!");
+
       } catch (error) {
         console.error("Error creating meal bookings:", error);
+        toast.error("Error creating meal bookings");
+      }
+      finally {
+        toast.dismiss(loader);
       }
 
       }

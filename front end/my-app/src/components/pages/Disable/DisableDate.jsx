@@ -13,6 +13,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {format} from "date-fns";
+import toast from "react-hot-toast";
 
 const DisableDate = () => {
   const [open, setOpen] = useState(false);
@@ -60,21 +61,25 @@ const DisableDate = () => {
         date: format(values.date, 'yyyy-MM-dd'),
         description: values.description,
       };
+      const loader = toast.loading(
+        "Please wait while we are processing your request"
+      );
 
       try {
         const response = await axios.post("/calendar/disableDate", data);
 
         if (response.status === 200) {
-          // API call was successful
-          // Perform any additional actions or show success message
-        } else {
-          // API call failed
-          // Handle the error, show error message, or perform necessary actions
-        }
+          
+          toast.success("Disable Date is successful!");
+
+        } 
       } catch (error) {
-        // Handle any error that occurred during the API call
+        
         console.error("API Error:", error);
-        // Show error message or perform necessary actions
+        toast.error("Some error occurred");
+      }
+      finally {
+        toast.dismiss(loader);
       }
     },
   });

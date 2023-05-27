@@ -213,7 +213,7 @@ function NavBar() {
                   textAlign="center"
                   to="/employees/create"
                 >
-                  Creat User
+                  Create User
                 </Typography>
               </MenuItem>
               {/* <MenuItem onClick={handleCloseUserMenu}>
