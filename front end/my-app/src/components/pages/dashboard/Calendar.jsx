@@ -11,6 +11,7 @@ export default function Calendar({data, onChange}) {
             primaryColor="#0a0a0a"
             secondaryColor="#FFFFFF"
             
+            
             data={data} 
             dataDisplay="list"
             handleClickDay={handleClick}
