@@ -16,6 +16,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import Error from "./components/Error";
 import DisableDate from "./components/pages/Disable/DisableDate";
 import { Box, CircularProgress } from "@mui/material";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,8 +25,9 @@ function App() {
     /** If user is loggged in, set default headers */
     if (isLoggedIn()) {
       axios.defaults.headers.common["Authorization"] = getAccessToken();
-      setTimeout(() => setIsLoading(false), 500);
     }
+
+    setTimeout(() => setIsLoading(false), 500);
   }, []);
 
   if (isLoading) {
@@ -40,52 +42,59 @@ function App() {
         }}
       >
         <CircularProgress />
+        <Toaster />
       </Box>
     );
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/password-reset" element={<PasswordReset />} />
-        <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} />
-        <Route path="*" element={<Error />} />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        ></Route>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/password-reset" element={<PasswordReset />} />
+          <Route
+            path="/forgotpassword/:id/:token"
+            element={<ForgotPassword />}
+          />
+          <Route path="*" element={<Error />} />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          ></Route>
 
-        <Route
-          path="/employees/create"
-          element={
-            <PrivateRoute>
-              <CreateEmployee />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/employees/Booking"
-          element={
-            <PrivateRoute>
-              <Addbooking/>
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/employees/Disable"
-          element={
-            <PrivateRoute>
-              <DisableDate />
-            </PrivateRoute>
-          }
-        ></Route>
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/employees/create"
+            element={
+              <PrivateRoute>
+                <CreateEmployee />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/employees/Booking"
+            element={
+              <PrivateRoute>
+                <Addbooking />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/employees/Disable"
+            element={
+              <PrivateRoute>
+                <DisableDate />
+              </PrivateRoute>
+            }
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+      <Toaster />
+    </>
   );
 }
 export default App;

@@ -43,9 +43,8 @@ export default function Login() {
         toast.success("Logged in successful!");
       }
     } catch (error) {
-      console.log(error);
-
       toast.error("Some error occurred");
+      console.log(error);
     } finally {
       toast.dismiss(loader);
     }
