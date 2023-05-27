@@ -1,73 +1,20 @@
-import { Badge, Calendar } from 'antd';
-const getListData = (value) => {
-  let listData;
-  switch (value.date()) {
-    case 8:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event.',
-        },
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        },
-      ];
-      break;
-    case 10:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event.',
-        },
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event.',
-        },
-      ];
-      break;
-    case 15:
-      listData = [
-        {
-          type: 'warning',
-          content: 'This is warning event',
-        },
-        {
-          type: 'success',
-          content: 'This is very long usual event。。....',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 1.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 2.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 3.',
-        },
-        {
-          type: 'error',
-          content: 'This is error event 4.',
-        },
-      ];
-      break;
-    default:
+import { Badge, Calendar } from "antd";
+import './Calendar2.module.css';
+
+const getListData = (value, selectedDate, selectedDateData) => {
+  if (value.toDate().getTime() === selectedDate.getTime()) {
+    return selectedDateData;
   }
-  return listData || [];
+  return [];
 };
+
 const getMonthData = (value) => {
   if (value.month() === 8) {
     return 1394;
   }
 };
-const Calender2 = () => {
+
+const Calender2 = ({ onChange, data, date }) => {
   const monthCellRender = (value) => {
     const num = getMonthData(value);
     return num ? (
@@ -77,8 +24,10 @@ const Calender2 = () => {
       </div>
     ) : null;
   };
+
   const dateCellRender = (value) => {
-    const listData = getListData(value);
+    const listData = getListData(value, date, data);
+
     return (
       <ul className="events">
         {listData.map((item) => (
@@ -90,29 +39,16 @@ const Calender2 = () => {
     );
   };
   const cellRender = (current, info) => {
-    if (info.type === 'date') return dateCellRender(current);
-    if (info.type === 'month') return monthCellRender(current);
+    if (info.type === "date") return dateCellRender(current);
+    if (info.type === "month") return monthCellRender(current);
     return info.originNode;
   };
-  return <Calendar cellRender={cellRender} />;
+
+  const handleDateSelect = (date) => {
+    onChange(date.toDate());
+  };
+
+  return <Calendar cellRender={cellRender} onSelect={handleDateSelect} mode='month' />;
 };
+
 export default Calender2;
-// .events {
-//   margin: 0;
-//   padding: 0;
-//   list-style: none;
-// }
-// .events .ant-badge-status {
-//   width: 100%;
-//   overflow: hidden;
-//   font-size: 12px;
-//   white-space: nowrap;
-//   text-overflow: ellipsis;
-// }
-// .notes-month {
-//   font-size: 28px;
-//   text-align: center;
-// }
-// .notes-month section {
-//   font-size: 28px;
-// }

@@ -6,46 +6,48 @@ import { Card } from "react-bootstrap";
 import axios from "axios";
 import { Box, borderRadius } from "@mui/system";
 import { format, getDate, getMonth, getYear } from "date-fns";
+import Calendar2 from "./Calendar2";
+
+const getColor = (type) => {
+  switch (type) {
+    case "warning":
+      return "#3E68F6";
+    case "success":
+      return "#16CE5C";
+    case "error":
+      return "#DD5635";
+  }
+
+  return "#3a3a3a";
+};
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
   const [date, setDate] = useState(null);
 
-  
   const findById = (countData, id) => {
     console.log(countData, id);
-    return countData.find(item => item._id === id);
-  }
-
+    return countData.find((item) => item._id === id);
+  };
 
   const calendarData = useMemo(() => {
     if (!data) return null;
 
-    const dateDetails = {
-      day: getDate(date),
-      month: getMonth(date) + 1,
-      year: getYear(date),
-    };
-
-
     return [
       {
-        ...dateDetails,
-        name: `Employee : ${findById(data, 'employee')?.total || 0}`,
-        color: "#5e4bba",
+        content: `Employee : ${findById(data, "employee")?.total || 0}`,
+        type: "warning",
       },
       {
-        ...dateDetails,
-        name: `Non Employee : ${findById(data, 'non-employee')?.count || 0}`,
-        color: "#ae312e",
+        content: `Non Employee : ${findById(data, "non-employee")?.count || 0}`,
+        type: "error",
       },
       {
-        ...dateDetails,
-        name: `Custom : ${findById(data, 'custom')?.count || 0}`,
-        color: "#2e7c29",
+        content: `Custom : ${findById(data, "custom")?.count || 0}`,
+        type: "success",
       },
     ];
-  }, [data, date]);
+  }, [data]);
 
   const getMealData = async (date) => {
     try {
@@ -64,16 +66,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (date) {
-        console.log("DATE", date)
-        getMealData(format(date, "yyyy-MM-dd"));
-      
+      getMealData(format(date, "yyyy-MM-dd"));
     }
   }, [date]);
 
   useEffect(() => {
-
     setDate(new Date());
-
   }, []);
 
   if (!data) {
@@ -89,8 +87,6 @@ export default function Dashboard() {
     );
   }
 
-  console.log("CA", calendarData)
-
   return (
     <DashboardLayout>
       <Grid container>
@@ -102,26 +98,33 @@ export default function Dashboard() {
         <Grid item xs={12} lg={8}>
           <Card>
             <CardContent>
-              <Calendar data={calendarData} onChange={setDate} />
+              <Calendar2 data={calendarData} date={date} onChange={setDate} />
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} lg={4}>
           <Card>
             <CardContent>
-                <Typography variant="h6">Meal Plan</Typography>
-                
+              <Typography variant="h6">
+                Meal Plan : {format(date, "yyyy-MM-dd")}
+              </Typography>
             </CardContent>
             <CardContent>
               {calendarData.map((item, index) => (
-                <Typography key={index} style={{ backgroundColor: item.color,margin:"5px" ,borderRadius:"10px" , padding :"20px" , color : "white" }}>
-                  {item.name}
-                  
+                <Typography
+                  key={index}
+                  style={{
+                    backgroundColor: getColor(item.type),
+                    margin: "5px",
+                    borderRadius: "10px",
+                    padding: "20px",
+                    color: "white",
+                  }}
+                >
+                  {item.content}
                 </Typography>
               ))}
             </CardContent>
-            
-            
           </Card>
         </Grid>
       </Grid>
