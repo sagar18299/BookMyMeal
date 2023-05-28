@@ -35,11 +35,11 @@ const TableList = ({ data }) => {
       { field: 'userName', headerName: 'Username', width: 150 },
       { field: 'department', headerName: 'Department', width: 150 },
       { field: 'total', headerName: 'Total', width: 100 },
-      { field: 'date', headerName: 'Date', width: 120 },
+      { field: 'date', headerName: 'Date', width: 400 },
     ];
   
     return (
-      <div style={{ height: 400, width: '100%', margin : "100px" }}>
+      <div style={{ height: 400, width: '100%', margin : "100px",marginTop:5 }}>
         <DataGrid rows={rows} columns={columns} pageSize={5} />
       </div>
     );
