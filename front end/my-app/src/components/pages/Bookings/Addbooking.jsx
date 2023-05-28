@@ -35,16 +35,25 @@ import  { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { MenuItem, Select } from '@mui/material';
 import { getMonth } from 'date-fns';
-
+import OtherList from './OtherList';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 
 export default function Addbooking() {
 
-
+  const [value, setValue] = React.useState('1');
   const [selectedMonth, setSelectedMonth] = useState(getMonth(new Date()) + 1);
 
   const [startDate, setStartDate] = useState('');
 const [endDate, setEndDate] = useState('');
+
+const handleChange = (event, newValue) => {
+  setValue(newValue);
+};
 
 const handleMonthChange = (event) => {
   const selectedMonth = event.target.value;
@@ -149,10 +158,21 @@ const handleMonthChange = (event) => {
      
     
      >
-       <Typography sx={{mx:"10%",marginTop:"2%",marginBottom:0}} variant="h6" fontWeight={600}>
+       <Typography sx={{mx:"13%",marginTop:"2%",marginBottom:0}} variant="h6" fontWeight={600}>
                 Booking List
        </Typography>
-    <FormControl  sx={{mx:"80%",marginTop:"0%",marginBottom:0}} >
+
+       <Box sx={{ width: '100%', typography: 'body1' }}>
+      <TabContext value={value}>
+        <Box sx={{ marginLeft:16 ,borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab label="Employee" value="1" />
+            <Tab label="Others" value="2" />
+           
+          </TabList>
+        </Box>
+        <TabPanel value="1">
+        <FormControl  sx={{mx:"80%",marginTop:"0%",marginBottom:0}} >
   <Select
    value={selectedMonth}
     onChange={handleMonthChange}
@@ -179,7 +199,26 @@ const handleMonthChange = (event) => {
 
 
     <TableList data={tableData}  />
-    </Grid >"
+        </TabPanel>
+        <TabPanel value="2">
+        <Grid >
+      <OtherList startDate={startDate} endDate={endDate} />
+    </Grid>
+          </TabPanel>
+      
+      </TabContext>
+    </Box>
+
+
+</Grid>
+
+
+
+
+
+
+   
+
      
         <Grid item xs={2}  sx={{ py:10,px:2,mx :16,my : 5}}  >
     <Grid xs={2} >

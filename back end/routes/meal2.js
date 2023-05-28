@@ -87,7 +87,7 @@ router.post('/createMeal2Bookings', authAdmin , async (req,res) =>{
   }
     res.status(200).send({ data : finalDates,message : 'Meal2 added sucessfully' });
   } catch (error) {
-    console.log('/createNewUser', error);
+    console.log('/createMeal2Bookings', error);
     return res.status(500).send('something went wrong. please try after some time');
   }
 });
@@ -101,7 +101,7 @@ router.post('/getMeal2BookingsByDate', authAdmin , async (req,res) =>{
 
     res.status(200).send({ data : meals, message : 'Meal2 by date get sucessfully' });
   } catch (error) {
-    console.log('/createNewUser', error);
+    console.log('/getMeal2BookingsByDate', error);
     return res.status(500).send('something went wrong. please try after some time');
   }
 });
@@ -133,7 +133,7 @@ router.post('/getMeal2BookingsByDateAggregation', authAdmin , async (req,res) =>
 
     res.status(200).send({ data : meals, message : 'Meal2 by date aggregation get sucessfully' });
   } catch (error) {
-    console.log('/createNewUser', error);
+    console.log('/getMeal2BookingsByDateAggregation', error);
     return res.status(500).send('something went wrong. please try after some time');
   }
 });
@@ -212,10 +212,69 @@ router.post('/getBookingForAllEmployees', authAdmin , async (req,res) =>{
     // ])
     res.status(200).send({ data : meals, message : 'Meal2 by date aggregation get sucessfully' });
   } catch (error) {
-    console.log('/createNewUser', error);
+    console.log('/getBookingForAllEmployees', error);
     return res.status(500).send('something went wrong. please try after some time');
   }
 });
+
+
+router.post('/getBookingForOthers', authAdmin, async (req, res) => {
+  try {
+    const startDate = new Date(req.body.startDate);
+    const endDate = new Date(req.body.endDate);
+
+    const meals = await Meal2.aggregate([
+      {
+        $match: {
+          $and: [
+            { date: { $gte: startDate } },
+            { date: { $lte: endDate } },
+            {
+              $or: [
+                { type: 'non-employee' },
+                { type: 'custom' }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        $group: {
+          _id: {
+            date: { $dateToString: { format: '%Y-%m-%d', date: '$date' } },
+            type: '$type'
+          },
+          meals: {
+            $push: {
+              type: '$type',
+              mealtype: '$mealType', // Include the meal type field here
+              count: '$count',
+              notes: '$notes'
+            }
+          },
+          mealCount: { $sum: 1 }
+        }
+      },
+      {
+        $group: {
+          _id: '$_id.date',
+          meals: {
+            $push: '$meals'
+          }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    res.status(200).json({ success: true, data: meals });
+  } catch (error) {
+    console.error('/getBookingForOthers', error);
+    res.status(500).json({ success: false, message: 'Something went wrong. Please try again later.' });
+  }
+});
+
 
 
 
