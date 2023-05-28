@@ -21,11 +21,14 @@ import {
   Typography,
 } from "@mui/material";
 import toast from "react-hot-toast";
+import {format} from "date-fns";
 
 import axios from "axios";
-import DateRangePicker from "tw-daterange";
+// import DateRangePicker from "tw-daterange";
 // import Datepicker from "react-tailwindcss-datepicker"; 
-
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker } from 'react-date-range';
 
 
 const validationSchema = Yup.object().shape({
@@ -44,6 +47,15 @@ const validationSchema = Yup.object().shape({
 const Form = () => {
   const [employeeList, setEmployeeList] = useState([]);
   const [selectedEmployees, setSelectedEmployees] = useState([]);
+
+
+
+  const selectionRange = {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection',
+  }
+ 
 
   useEffect(() => {
     fetchEmployeeList();
@@ -72,19 +84,29 @@ const Form = () => {
       mealType: "",
       notes: "notes",
       count: "0",
-      startDate: null,
-      endDate: null
-    },
+      dateRange :   {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+      }
+    }
+    
+    
+    
+    ,
     onSubmit: async (values) => {
       const payload = {
-        startDate: values.startDate,
-        endDate: values.endDate,
+        startDate: format(values.dateRange.startDate, 'yyyy-MM-dd'),
+        endDate:  format(values.dateRange.endDate, 'yyyy-MM-dd'),
         type: values.category.toLowerCase(),
         mealType: values.mealType.toLowerCase(),
         employeeIds: selectedEmployees,
         count: values.count,
         notes: values.notes
+
+
       };
+      console.log(payload,values);
       const loader = toast.loading(
         "Please wait while we are processing your request"
       );
@@ -108,10 +130,16 @@ const Form = () => {
       }
     });
 
+    const handleSelect =(ranges)=>{
+      console.log(ranges);
+     formik.setFieldValue("dateRange",ranges.selection)
+
+    }
+
 
   
 
-  const { category, mealType, notes, count,startDate, endDate } = formik.values;
+  const { category, mealType, notes, count, dateRange } = formik.values;
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -170,13 +198,21 @@ const Form = () => {
         <Grid item >
           <FormControl component="fieldset">
             <FormLabel component="legend">Date</FormLabel>
-            <DateRangePicker
+            {/* <DateRangePicker
         initialRange={formik.values}
         onUpdate={(dateRange) => {
           formik.setFieldValue("startDate", dateRange.startDate);
           formik.setFieldValue("endDate", dateRange.endDate);
         }}
-      /> 
+      />  */}
+
+      <DateRangePicker
+       ranges={[dateRange]}
+       onChange={handleSelect}
+      
+      />
+
+
           </FormControl>
         </Grid>
 
