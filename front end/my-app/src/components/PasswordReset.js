@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 export default function PasswordReset() {
 
@@ -10,13 +11,24 @@ export default function PasswordReset() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+      const loader = toast.loading(
+      "please type ypur email id "
+    );
+
+
     try {
       // Send a POST request to the backend API with the email
       await axios.post('/forgotPassword/forgotPasswordLink', { email });
       console.log('Reset password email sent.'); // Success message
+        toast.success("Reset password email sent");
     } catch (error) {
       console.error('Error sending reset password email:', error);
+      toast.error("Error sending reset password email please provide valid email");
       // Handle error
+    }
+    finally {
+      toast.dismiss(loader);
     }
   };
 
