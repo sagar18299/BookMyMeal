@@ -18,17 +18,18 @@ const TableList = ({ data }) => {
     const dataArray = Array.isArray(data.data) ? data.data : [data.data];
 
     // const dataArray = Object.values(data.data);
+    console.table(dataArray);
   
     const rows = dataArray.map((item) => ({
       id: item._id,
       _id: item._id,
       userName: item.userName,
-      department: item.department || '',
+      department: item.department ,
       total: item.total,
       date: item.date.map((date) => formatDate(date)).join(', '),
     }));
 
-    console.log(rows);
+    console.table(rows);
   
     const columns = [
       { field: '_id', headerName: 'ID', width: 150 },

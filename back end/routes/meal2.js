@@ -175,7 +175,7 @@ router.post('/getBookingForAllEmployees', authAdmin , async (req,res) =>{
         $group: {
           _id: '$employeeId',
           userName: { $first: '$user.firstName' },
-          deparment: { $first: '$user.department' },
+          department: { $first: '$user.department' },
           date: { $push: '$date' }
         }
       },
@@ -183,7 +183,7 @@ router.post('/getBookingForAllEmployees', authAdmin , async (req,res) =>{
         $project: {
           _id: 1,
           userName: 1,
-          deparment: 1,
+          department: 1,
           date: 1,
           total: { $size: '$date' }
         }
