@@ -43,7 +43,7 @@ export default function Login() {
         toast.success("Logged in successful!");
       }
     } catch (error) {
-      toast.error("Some error occurred");
+      toast.error("invalid credentials or Time out");
       console.log(error);
     } finally {
       toast.dismiss(loader);

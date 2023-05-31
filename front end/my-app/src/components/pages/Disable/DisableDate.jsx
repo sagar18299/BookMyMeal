@@ -62,7 +62,7 @@ const DisableDate = () => {
         description: values.description,
       };
       const loader = toast.loading(
-        "Please wait while we are processing your request"
+        "Please wait while we are diableing your given date"
       );
 
       try {
@@ -76,7 +76,7 @@ const DisableDate = () => {
       } catch (error) {
         
         console.error("API Error:", error);
-        toast.error("Some error occurred");
+        toast.error("Date is not Disabled try gain!!");
       }
       finally {
         toast.dismiss(loader);

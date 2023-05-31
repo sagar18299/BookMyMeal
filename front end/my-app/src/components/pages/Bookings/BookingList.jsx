@@ -108,7 +108,7 @@ const Form = () => {
       };
       console.log(payload,values);
       const loader = toast.loading(
-        "Please wait while we are processing your request"
+        "we are booking your meal..."
       );
   
       try {
@@ -121,7 +121,7 @@ const Form = () => {
 
       } catch (error) {
         console.error("Error creating meal bookings:", error);
-        toast.error("Error creating meal bookings");
+        toast.error("some inconvenience happened try agin");
       }
       finally {
         toast.dismiss(loader);
