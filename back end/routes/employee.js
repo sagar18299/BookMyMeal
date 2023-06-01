@@ -27,10 +27,7 @@ router.post('/login', async (req,res) =>{
     user.tokens = await user.tokens.concat({ token });
     await user.save();
     
-  //   res.cookie("usercookie",token,{
-  //     expires:new Date(Date.now()+9000000),
-  //     httpOnly:true
-  // });
+  
 
     res.status(200).send({ data : { token : token, email : user.email }, message : 'User loggin sucessfully.' });
   } catch (error) {
