@@ -28,18 +28,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 
 
-// const validationSchema = Yup.object().shape({
-//   category: Yup.string().required("Category is required"),
-//   mealType: Yup.string().required("Meal type is required"),
-//   notes: Yup.string().when("category", {
-//     is: "Non-Employee",
-//     then: Yup.string().required("Notes is required"),
-//   }),
-//   bookingCount: Yup.number().when("category", {
-//     is: "Non-Employee",
-//     then: Yup.number().required("Booking count is required").positive(),
-//   }),
-// });
+
 
 const Form = () => {
   const [employeeList, setEmployeeList] = useState([]);
@@ -47,11 +36,7 @@ const Form = () => {
 
 
 
-  // const selectionRange = {
-  //   startDate: new Date(),
-  //   endDate: new Date(),
-  //   key: 'selection',
-  // }
+
  
 
   useEffect(() => {

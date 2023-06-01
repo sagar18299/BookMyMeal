@@ -8,6 +8,8 @@ const authAdmin = require('../middlewares/auth-admin');
 const moment = require('moment');
 const _ = require('lodash');
 
+const { EMPLOYEE, NON_EMPLOYEE,CUSTOM } = require('../constants/constants');
+
 router.post('/createMealBookings', authAdmin , async (req,res) =>{
   try {
     //validation joi
@@ -136,7 +138,7 @@ router.post('/getBookingForAllEmployees', authAdmin , async (req,res) =>{
     const meals = await Meal.aggregate([
       {
         $match: {
-          $and: [{ date: { $gte: startDate } }, { date: { $lte: endDate } }, { type: 'employee' }]
+          $and: [{ date: { $gte: startDate } }, { date: { $lte: endDate } }, { type: EMPLOYEE }]
         }
       },
       {
@@ -192,8 +194,8 @@ router.post('/getBookingForOthers', authAdmin, async (req, res) => {
             { date: { $lte: endDate } },
             {
               $or: [
-                { type: 'non-employee' },
-                { type: 'custom' }
+                { type: NON_EMPLOYEE },
+                { type: CUSTOM }
               ]
             }
           ]

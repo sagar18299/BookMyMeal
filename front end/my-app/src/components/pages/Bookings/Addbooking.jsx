@@ -73,10 +73,7 @@ const handleMonthChange = (event) => {
             endDate: endDate
           });
           
-          // const response = await axios.post('/meal/getBookingForAllEmployees',{
-          //   "startDate" : "2023-05-01",
-          //   "endDate" : "2023-05-30"
-          // });
+         
           const data = response.data;
           setTableData(data);
         } catch (error) {
@@ -90,8 +87,8 @@ const handleMonthChange = (event) => {
 
     useEffect(() => {
       const year = new Date().getFullYear(); // assuming current year
-      const startOfMonth = new Date(year, selectedMonth - 1, 1);
-      const endOfMonth = new Date(year, selectedMonth, 0);
+      const startOfMonth = new Date(year, selectedMonth - 1,2);
+      const endOfMonth = new Date(year, selectedMonth, 1);
       setStartDate(startOfMonth.toISOString().split('T')[0]);
       setEndDate(endOfMonth.toISOString().split('T')[0]);
     }, []);
