@@ -1,11 +1,10 @@
 import { CardContent, CircularProgress, Grid, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import Calendar from "./Calendar";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { Card } from "react-bootstrap";
 import axios from "axios";
-import { Box, borderRadius } from "@mui/system";
-import { format, getDate, getMonth, getYear } from "date-fns";
+import { Box } from "@mui/system";
+import { format } from "date-fns";
 import Calendar2 from "./Calendar2";
 
 const getColor = (type) => {
@@ -95,14 +94,14 @@ export default function Dashboard() {
         </Grid>
       </Grid>
       <Grid container spacing={4} sx={{ px: 8 }}>
-        <Grid item xs={12} lg={8}>
+        <Grid item xs={12} lg={9}>
           <Card>
             <CardContent>
-              <Calendar2 data={calendarData} date={date} onChange={setDate} />
+              <Calendar2  data={calendarData} date={date} onChange={setDate} />
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} lg={4}>
+        <Grid item xs={12} lg={3}>
           <Card>
             <CardContent>
               <Typography variant="h6">

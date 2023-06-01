@@ -3,10 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
-var randomstring = require("randomstring");
 const nodemailer = require('nodemailer');
-const Joi = require('joi');
-const authAdmin = require('../middlewares/auth-admin');
 const jwt = require('jsonwebtoken');
 
 
@@ -14,12 +11,9 @@ router.post('/forgotPasswordLink' , async (req,res) =>{
     console.log(req.body);
     const {email} = req.body;
   try {
-    //check request using joi 
-    // const { error , value  } = registerUserValidationSchema().validate(req.body, { abortEarly : false });
-    // if( error ) return res.status(400).send({ message : 'Bad Request', error : error.details });
 
     let user = await User.findOne({ email : email});
-// console.log(user);
+
 
     const token = generateAuthToken(user);
 
@@ -96,7 +90,7 @@ router.post("/resetPassword/:id/:token",async(req,res)=>{
         // console.log(validuser);
         
         const verifyToken = jwt.verify(token,process.env.JWT_SECRET_EMPLOYEE);
-        console.log(verifyToken);
+        // console.log(verifyToken);
 
         if(validuser && verifyToken._id){
             // const newpassword = await bcrypt.hash(password,12);
