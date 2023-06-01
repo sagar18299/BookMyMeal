@@ -86,12 +86,12 @@ const handleMonthChange = (event) => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.post('/meal2/getBookingForAllEmployees', {
+          const response = await axios.post('/meal/getBookingForAllEmployees', {
             startDate: startDate,
             endDate: endDate
           });
           
-          // const response = await axios.post('/meal2/getBookingForAllEmployees',{
+          // const response = await axios.post('/meal/getBookingForAllEmployees',{
           //   "startDate" : "2023-05-01",
           //   "endDate" : "2023-05-30"
           // });

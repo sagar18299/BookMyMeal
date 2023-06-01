@@ -1,85 +1,73 @@
+
 const mongoose = require('mongoose');
 
-const empSchema = new mongoose.Schema({
-  empId : {
-    type : String,
-    required : true
-  },
-  coupon : {
-    type : String,
-    required : true
-  }
-});
-
-const nonEmpSchema = new mongoose.Schema({
-  count : {
-    type : String,
-    required : true
-  },
-  reason : {
-    type : String,
-    required : false
-  }
-});
-
-const customeEmpSchema = new mongoose.Schema({
-  count : {
-    type : String,
-    required : true
-  },
-  category : {
-    type : String,
-    required : true
-  },
-  reason : {
-    type : String,
-    required : true
-  }
-},{ timestamps : true });
-
 const mealSchema = new mongoose.Schema({
-  date : {
-   type : mongoose.Schema.Types.Date,
-   required : true,
-   unique : true
+  type : {
+    type : String,
+    required : true,
+    enum : ['employee','non-employee','custom']
   },
-  lunchEmployees : {
-    type : [Number]
-  },
-  dinnerEmployees : {
-    type : [Number]
-  },
-  nonEmployees : {
-    type : [Number]
-  },
-  custom  : {
-    type : [Number],
-  },
-  createdBy : {
-    type : mongoose.Schema.Types.ObjectId,
-    required : false,
+  employeeId : {
+    type : String,
     ref : 'User'
   },
-  disable : {
-    date : {
-      type : Date,
-      required : false
-    },
-    reason : {
-      type :String ,
-      required :false
-      }
+  date : {
+   type : mongoose.Schema.Types.Date,
+   required : true
   },
-  reedemLunchEmployees : {
-    type : [Number],
-    default : []
+  count : {
+    type : Number,
+    required : false
+  },
+  mealType : {
+    type : String,
+    required : true,
+    enum : ['lunch','dinner']
+  },
+  notes : {
+    type : String,
+    required : false
+  },
+  
+  createdBy : {
+    type : mongoose.Schema.Types.ObjectId,
+    required : true,
+    ref : 'User'
   },
   updatedBy : {
     type : mongoose.Schema.Types.ObjectId,
     required : false
-  }
+  },
+  disabled : {
+    type : Boolean,
+    required : false  
+  },
+  disabledDescription : {
+    type : String,
+    required  : false
+  },
+  disabledBy : {
+    type : mongoose.Schema.Types.ObjectId,
+    required : false,
+    ref : 'User'
+  },
+  disabledAt : {
+    type : Date,
+    required : false
+  },
+  reedem : {
+    type : Boolean,
+    default : false
+    
+  },
+  cancel : {
+    type : Boolean,
+    default : false
+    
+  },
+  
 }, { timestamps : true });
 
-const Meal = mongoose.model('Meal', mealSchema);
+const Meal = mongoose.model('meal', mealSchema);
 
 module.exports.Meal = Meal;

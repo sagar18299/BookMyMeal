@@ -24,8 +24,6 @@ import toast from "react-hot-toast";
 import {format} from "date-fns";
 
 import axios from "axios";
-// import DateRangePicker from "tw-daterange";
-// import Datepicker from "react-tailwindcss-datepicker"; 
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
@@ -113,7 +111,7 @@ const Form = () => {
   
       try {
         const response = await axios.post(
-          "/meal2/createMeal2Bookings",
+          "/meal/createMealBookings",
           payload
         );
         console.log("Response:", response.data);
@@ -198,13 +196,7 @@ const Form = () => {
         <Grid item >
           <FormControl component="fieldset">
             <FormLabel component="legend">Date</FormLabel>
-            {/* <DateRangePicker
-        initialRange={formik.values}
-        onUpdate={(dateRange) => {
-          formik.setFieldValue("startDate", dateRange.startDate);
-          formik.setFieldValue("endDate", dateRange.endDate);
-        }}
-      />  */}
+      
 
       <DateRangePicker
        ranges={[dateRange]}

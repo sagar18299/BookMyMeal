@@ -67,11 +67,11 @@ router.get("/forgotpassword/:id/:token",async(req,res)=>{
     try {
         const validuser = await User.findOne({_id:id,verifytoken:token});
 
-        console.log(validuser);
+        // console.log(validuser);
         
         const verifyToken = jwt.verify(token,process.env.JWT_SECRET_EMPLOYEE);
 
-        console.log(verifyToken)
+        // console.log(verifyToken)
 
         if(validuser && verifyToken._id){
             res.status(200).json({status:200,validuser})

@@ -10,7 +10,7 @@ const OtherList = ({startDate,endDate}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:4000/meal2/getBookingForOthers', {
+        const response = await axios.post('http://localhost:4000/meal/getBookingForOthers', {
           startDate: startDate, // Replace with your desired start date
           endDate: endDate, // Replace with your desired end date
         //   startDate: '2023-01-01', // Replace with your desired start date

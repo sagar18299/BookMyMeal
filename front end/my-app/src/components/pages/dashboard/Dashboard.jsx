@@ -52,7 +52,7 @@ export default function Dashboard() {
   const getMealData = async (date) => {
     try {
       const { data: response } = await axios.post(
-        "/meal2/getMeal2BookingsByDateAggregation",
+        "/meal/getMealBookingsByDateAggregation",
         {
           date: date,
         }

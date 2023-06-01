@@ -39,14 +39,9 @@ const userSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      // required : true,
       ref: "User",
     },
-    certifications: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "EmployeeCertification",
-      default: [],
-    },
+   
     updatedBy: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,

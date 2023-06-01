@@ -32,17 +32,12 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
     });
 
     const password = randomstring.generate(10);
-    //const password = '12345';
     const salt = await bcrypt.genSalt(10);
     user.password = bcrypt.hashSync(password, salt);
 
     user = await user.save();
 
-    // 1) set 2 step verification of GMAIL 
-    // 2 ) security => "App Passwords" -> 
-
-    // send email to employee email id 
-    //  sendEmail('emailid', 'password');
+  
     
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -115,15 +110,39 @@ router.post('/createNewAdmin', async (req,res) =>{
     user.password = bcrypt.hashSync(password, salt);
 
     user = await user.save();
-    //send email to employee email id 
-     // sendEmail('emailid', 'password');
-    //
+
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port:  587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD
+      }
+   });
+
+   const mailOptions = {
+    from: process.env.EMAIL_USERNAME, // Sender address
+    to: user.email, // List of recipients
+    subject: 'Node Mailer New user registered', // Subject line
+    text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
+   };
+
+   transporter.sendMail(mailOptions, function(err, info) {
+    if (err) {
+      console.log(err)
+      } 
+    });
     res.status(200).send({ data : user, message : 'User added sucessfully' });
   } catch (error) {
-    console.log('/createNewAdmin', error);
+    console.log('/createNewUser', error);
     return res.status(500).send('something went wrong. please try after some time');
   }
 });
+
+
+   
+
 
 const ValidationAdminSchema = () => {
   const schema = Joi.object({

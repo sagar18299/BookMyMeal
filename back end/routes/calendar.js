@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { Calendar } = require('../models/calendar');
-const { Meal2 } = require('../models/meal2');
+const { Meal } = require('../models/meal');
 const auth = require('../middlewares/auth-admin');
 const { User } = require('../models/user');
 const nodemailer = require('nodemailer');
@@ -25,7 +25,7 @@ router.post('/disableDate', auth , async (req,res) =>{
     calendar = await calendar.save();
     // get booking for this date 
 
-    const meals = await Meal2.aggregate([
+    const meals = await Meal.aggregate([
       {
         $match : { $and: [{ date  :  { $eq : date } }, {  type : 'employee'  }]}    
       },
@@ -51,7 +51,7 @@ router.post('/disableDate', auth , async (req,res) =>{
     const userEmails = users.map(user => user.email);
 
     // disabled user 
-    await Meal2.updateMany({ date : date } , { $set : { disabled : true, disabledDescription : req.body.description } });
+    await Meal.updateMany({ date : date } , { $set : { disabled : true, disabledDescription : req.body.description } });
   
     // get the employee ids in array to send email for disabled date
 

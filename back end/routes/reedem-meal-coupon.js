@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/user');
-const { Meal2 } = require('../models/meal2');
+const { Meal } = require('../models/meal');
 const { Calendar } = require('../models/calendar');
 const Joi = require('joi');
 const auth = require('../middlewares/auth');
@@ -11,7 +11,7 @@ const _ = require('lodash');
 router.post('/redeemMealCoupon', auth , async (req,res) =>{
   try {
       // req validation using joi 
-      let meal = await Meal2.findOne({ date : new Date(req.body.date),employeeId : req.body.employeeId });
+      let meal = await Meal.findOne({ date : new Date(req.body.date),employeeId : req.body.employeeId });
       if(meal){
         if(meal.cancel="false"){
           meal.reedem="true"
@@ -50,7 +50,7 @@ router.post('/redeemMealCoupon', auth , async (req,res) =>{
 router.post('/cancelMealCoupon', auth , async (req,res) =>{
   try {
       // req validation using joi 
-      let meal = await Meal2.findOne({ date : new Date(req.body.date),employeeId : req.body.employeeId });
+      let meal = await Meal.findOne({ date : new Date(req.body.date),employeeId : req.body.employeeId });
       if(meal){
         meal.cancel="true";
       }
