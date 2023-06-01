@@ -71,6 +71,54 @@ router.post('/disableDate', auth , async (req,res) =>{
       to: user.email,
       subject: 'Meal Cancellation',
       text: `Dear ${user.firstName},\n\nYour meal on ${date.toDateString()} has been canceled.\n\nRegards,\nBook My Meal`,
+      html: `<!DOCTYPE html>
+      <html>
+      <head>
+          <title>Meal Cancellation</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  padding: 20px;
+              }
+              .container {
+                  max-width: 600px;
+                  margin: 0 auto;
+                  background-color: #f5f5f5;
+                  padding: 20px;
+                  border-radius: 5px;
+                  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                  color: #333;
+              }
+              p {
+                  margin-top: 10px;
+                  margin-bottom: 20px;
+              }
+              .message {
+                  background-color: #fff;
+                  padding: 20px;
+                  border-radius: 5px;
+                  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+              }
+              .label {
+                  font-weight: bold;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <h1>Meal Cancellation</h1>
+              <p>Dear ${user.firstName},</p>
+              <p>We regret to inform you that your meal on ${date.toDateString()} has been canceled.</p>
+              <p>If you have any questions or concerns, please don't hesitate to contact us.</p>
+              <p>Thank you for your understanding.</p>
+              <p>Regards,<br>Book My Meal</p>
+          </div>
+      </body>
+      </html>
+      `,
     };
   
     // Send the email
@@ -88,24 +136,7 @@ router.post('/disableDate', auth , async (req,res) =>{
 });
 
 
-// router.post('/getAllCalendarDates', auth , async (req,res) =>{
-//   try {
-//     //
-//     const pageOptions = {
-//       page : req.body.pageNo,
-//       limit : req.body.limit
-//     }
-    
-//     const caledarDates = await Calendar.find({}).sort({ createdAt : -1 }).skip((pageOptions.page - 1 ) * pageOptions.limit).limit(pageOptions.limit);
-    
-    
-//     res.status(200).send({ message : 'disabled dates get successfully.', data : { caledarDates }  });
 
-//   } catch (error) {
-//     console.log('/getAllCalendarDates', error);
-//     return res.status(500).send('something went wrong. please try after some time');
-//   }
-// });
 
 router.post('/getAllCalendarDates', auth , async (req,res) =>{
   try {

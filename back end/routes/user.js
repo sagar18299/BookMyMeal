@@ -52,9 +52,60 @@ router.post('/createNewUser', authAdmin , async (req,res) =>{
    const mailOptions = {
     from: process.env.EMAIL_USERNAME, // Sender address
     to: user.email, // List of recipients
-    subject: 'Node Mailer New user registered', // Subject line
-    text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
-   };
+    subject: 'New user registered', // Subject line
+    html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Welcome to Book My Meal</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #f5f5f5;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #333;
+            }
+            p {
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+            .credentials {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to Book My Meal</h1>
+            <p>Dear ${user.firstName},</p>
+            <p>Welcome to Book My Meal! Your account has been successfully created. Please find your login credentials below:</p>
+            <div class="credentials">
+                <p class="label">Email:</p>
+                <p>${user.email}</p>
+                <p class="label">Password:</p>
+                <p>${password}</p>
+            </div>
+            <p>You can now access your account and start using our services.</p>
+            <p>Thank you for choosing Book My Meal!</p>
+        </div>
+    </body>
+    </html>
+    `   };
 
    transporter.sendMail(mailOptions, function(err, info) {
     if (err) {
@@ -124,8 +175,60 @@ router.post('/createNewAdmin', async (req,res) =>{
    const mailOptions = {
     from: process.env.EMAIL_USERNAME, // Sender address
     to: user.email, // List of recipients
-    subject: 'Node Mailer New user registered', // Subject line
-    text: `Hello People!, Welcome to Book MY MEAL your credentials are email : ${user.email} , password : ${password}`, // Plain text body
+    subject: 'New user registered', // Subject line
+    html: `<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Welcome to Book My Meal</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #f5f5f5;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #333;
+            }
+            p {
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+            .credentials {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to Book My Meal</h1>
+            <p>Dear ${user.firstName},</p>
+            <p>Welcome to Book My Meal! Your account has been successfully created. Please find your login credentials below:</p>
+            <div class="credentials">
+                <p class="label">Email:</p>
+                <p>${user.email}</p>
+                <p class="label">Password:</p>
+                <p>${password}</p>
+            </div>
+            <p>You can now access your account and start using our services.</p>
+            <p>Thank you for choosing Book My Meal!</p>
+        </div>
+    </body>
+    </html>
+    ` 
    };
 
    transporter.sendMail(mailOptions, function(err, info) {

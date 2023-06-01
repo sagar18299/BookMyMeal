@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 
 router.post('/forgotPasswordLink' , async (req,res) =>{
-    console.log(req.body);
+    
     const {email} = req.body;
   try {
 
@@ -18,8 +18,6 @@ router.post('/forgotPasswordLink' , async (req,res) =>{
     const token = generateAuthToken(user);
 
     const setusertoken = await User.findByIdAndUpdate({_id:user._id},{verifytoken:token},{new:true});
-
-console.log(setusertoken);
 
 
 
@@ -39,14 +37,63 @@ console.log(setusertoken);
     from: process.env.EMAIL_USERNAME, // Sender address
     to: user.email, // List of recipients
     subject:"Sending Email For password Reset",
-    text:`This Link Valid For 2 MINUTES http://localhost:3000/forgotpassword/${user._id}/${setusertoken.verifytoken}`   };
+    html:`<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Password Reset</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #f5f5f5;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #333;
+            }
+            p {
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+            .button {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            .button.white-text {
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Password Reset</h1>
+            <p>Hello ${user.firstName},</p>
+            <p>We have received a request to reset your password. To proceed with the password reset, please click the button below:</p>
+            <a href="http://localhost:3000/forgotpassword/${user._id}/${setusertoken.verifytoken}" class="button white-text">Reset Password</a>
+            <p>If you didn't request a password reset, please ignore this email.</p>
+            <p>Thank you.</p>
+        </div>
+    </body>
+    </html>
+    `   };
 
     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
             console.log("error",error);
             res.status(401).json({status:401,message:"email not send"})
         }else{
-            console.log("Email sent",info.response);
             res.status(200).json({status:200,message:"Email sent Succsfully"})
         }
     })
@@ -57,15 +104,12 @@ console.log(setusertoken);
 
 router.get("/forgotpassword/:id/:token",async(req,res)=>{
     const {id,token} = req.params;
-    // console.log(id,token);
     try {
         const validuser = await User.findOne({_id:id,verifytoken:token});
 
-        // console.log(validuser);
         
         const verifyToken = jwt.verify(token,process.env.JWT_SECRET_EMPLOYEE);
 
-        // console.log(verifyToken)
 
         if(validuser && verifyToken._id){
             res.status(200).json({status:200,validuser})
@@ -83,17 +127,13 @@ router.post("/resetPassword/:id/:token",async(req,res)=>{
 
     const {password} = req.body;
 
-    console.log(password);
 
     try {
         const validuser = await User.findOne({_id:id,verifytoken:token});
-        // console.log(validuser);
         
         const verifyToken = jwt.verify(token,process.env.JWT_SECRET_EMPLOYEE);
-        // console.log(verifyToken);
 
         if(validuser && verifyToken._id){
-            // const newpassword = await bcrypt.hash(password,12);
             const salt = await bcrypt.genSalt(10);
             const newpassword = bcrypt.hashSync(password, salt);
 
