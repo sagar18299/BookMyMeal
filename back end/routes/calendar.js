@@ -12,8 +12,7 @@ const nodemailer = require('nodemailer');
 router.post('/disableDate', auth , async (req,res) =>{
   try {
     const date = new Date(req.body.date);
-    // validation req.body using joi
-    // date must be future date
+   
     let calendar = await Calendar.findOne({ date : date } );
     if(calendar) return res.status(400).send({ message : `Date ${date.toDateString()} is already disabled` });
 
@@ -140,7 +139,7 @@ router.post('/disableDate', auth , async (req,res) =>{
 
 router.post('/getAllCalendarDates', auth , async (req,res) =>{
   try {
-    //
+    
     const pageOptions = {
       page : req.body.pageNo,
       limit : req.body.limit
